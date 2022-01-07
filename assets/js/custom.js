@@ -1,6 +1,10 @@
 // Js for working a functionality 
 jQuery( document ).ready(function(jQuery) {
-    
+    // Method for checking white spaces 
+    jQuery.validator.addMethod("noSpace", function(value, element) { 
+        return value.indexOf(" ") < 0 && value != ""; 
+    }, "No space please and don't leave it empty");
+
     jQuery( "#add_cpt_form" ).validate({
         rules: {
             cpt_name: {
@@ -14,6 +18,7 @@ jQuery( document ).ready(function(jQuery) {
             cpt_slug: {
                 'required':true,
                 'maxlength':20,
+                noSpace: true,
             },
             cpt_icon:'required',
         },
@@ -32,48 +37,27 @@ jQuery( document ).ready(function(jQuery) {
             },
         },
         submitHandler: function (form) { // for demo
-            return false;
+            jQuery.ajax({
+                type : "post",
+                url : myAjax.ajaxurl,
+                // data : {action: "check_post_exist",slug: slug_name},
+                data : jQuery('#add_cpt_form').serialize()+'&action=check_post_exist',
+                success: function(response) {
+                    console.log(response);
+                    // response = response.substring(0, response.length - 1);
+                    var obj = JSON.parse(response);
+                
+                    if(obj.error != ''){
+                        jQuery('.msg').html('<span class="error">'+obj.error+'</span>')
+                    }else{
+                        jQuery('.msg').html('<span class="success">'+obj.success+'</span>')
+                    }
+                },error:function(){
+                    
+                }
+             });    
         }
       });
-
-    //   jQuery("#cpt_slug_id").keypress(function(e) {
-    //     var slug_name = jQuery(this).val();
-    //     if(slug_name !== ''){
-    //         jQuery.ajax({
-    //             type : "post",
-    //             url : myAjax.ajaxurl,
-    //             data : {action: "check_post_exist",slug: slug_name},
-    //             success: function(response) {
-    //             response = response.substring(0, response.length - 1);
-    //             console.log(response);
-    //             },error:function(){
-                
-    //             }
-    //         });
-    //     }       
-    //   });
-
-        jQuery("#add_cpt_form").submit(function(e){
-        var slug_name = jQuery('#cpt_slug_id').val();
-        jQuery.ajax({
-            type : "post",
-            url : myAjax.ajaxurl,
-            data : {action: "check_post_exist",slug: slug_name},
-            success: function(response) {
-                // response = response.substring(0, response.length - 1);
-                var obj = JSON.parse(response);
-            
-                if(obj.error != ''){
-                    jQuery('.msg').html('<span class="error">'+obj.error+'</span>')
-                }else{
-                    jQuery('.msg').html('<span class="success">'+obj.success+'</span>')
-                }
-            },error:function(){
-                
-            }
-         });
-        });
-
 
 });
 

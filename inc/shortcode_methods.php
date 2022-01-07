@@ -18,7 +18,11 @@ if ( ! class_exists( 'cptbs_shortcode_methods' ) ) {
         }
 
         public function cptbs_check_cpt(){
-            $slug_name = $_POST['slug'];
+            $slug_name = $_POST['cpt_slug'];    
+            $post_type_name = $_POST['cpt_name'];
+            $singular_name = $_POST['cpt_singular_name'];
+            // $post_icon = $_POST['cpt_icon'];
+
             if(post_type_exists($slug_name)){
                 $post_type_msg = array ('error'=>'Post Type is already exists','success'=>'');
                 echo json_encode($post_type_msg);

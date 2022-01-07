@@ -24,7 +24,7 @@ if ( ! class_exists( 'cptbs_shortcode_form' ) ) {
             public function cptbs_register_cpt_form(){
                 $this->cptbs_load_css_js();
                 echo '
-                <form method="post" id="add_cpt_form" action="">
+                <form method="post" id="add_cpt_form" action="" enctype="multipart/form-data">
                 <h1>Register Your Custom Post Type</h1>
                 <div class="form-group">
                     <label for="cpt_name_id">Custom Post Type Name</label>
@@ -40,7 +40,7 @@ if ( ! class_exists( 'cptbs_shortcode_form' ) ) {
                 </div>                
                 <div class="form-group">
                     <label for="cpt_icon">Add Icon for Custom Post Type</label>
-                    <input type="file" class="form-control" id="cpt_icon" name="cpt_icon" >
+                    <input type="file" class="form-control" id="cpt_icon_id" name="cpt_icon" >
                 </div>
                 <div class="form-group submit-div">
                     <input type="submit" class="form-control" id="add_cpt_id" name="add_cpt" value="Submit" >
