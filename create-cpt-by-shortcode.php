@@ -13,7 +13,7 @@
     
     defined( 'ABSPATH' ) or die( 'Hey, you can\t access this file, you silly human!' );
     
-    define('PLUGIN_URL' , WP_PLUGIN_URL . '/Custom-Post-By-Taxonomies/' ); // this constant uses in enqueue file and style
+    define('FOLDER_PATH' , WP_PLUGIN_URL . '/create-cpt-by-shortcode/' ); // this constant uses in enqueue file and style
 
     if ( ! class_exists( 'cptbs_custom_post_by_shortcode' ) ) {
         

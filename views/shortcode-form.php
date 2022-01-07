@@ -10,6 +10,7 @@ if ( ! class_exists( 'cptbs_shortcode_form' ) ) {
             // Constructor for rendering a form for cpt 
             public function __construct(){
                 $this->cptbs_hooks();
+                $this->cptbs_load_methods();
             }
             //End Constructor for rendering a form for cpt 
 
@@ -23,7 +24,7 @@ if ( ! class_exists( 'cptbs_shortcode_form' ) ) {
             public function cptbs_register_cpt_form(){
                 $this->cptbs_load_css_js();
                 echo '
-                <form method="post">
+                <form method="post" id="add_cpt_form" action="">
                 <h1>Register Your Custom Post Type</h1>
                 <div class="form-group">
                     <label for="cpt_name_id">Custom Post Type Name</label>
@@ -41,9 +42,10 @@ if ( ! class_exists( 'cptbs_shortcode_form' ) ) {
                     <label for="cpt_icon">Add Icon for Custom Post Type</label>
                     <input type="file" class="form-control" id="cpt_icon" name="cpt_icon" >
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="form-control" id="add_cpt_id" name="add_cpt" >
+                <div class="form-group submit-div">
+                    <input type="submit" class="form-control" id="add_cpt_id" name="add_cpt" value="Submit" >
                 </div>
+                <span class="msg"></span>
               </form>';
             }
             //End Function for loading css js and form
@@ -53,7 +55,10 @@ if ( ! class_exists( 'cptbs_shortcode_form' ) ) {
                 require_once WP_PLUGIN_DIR . '/create-cpt-by-shortcode/inc/include_css_js.php';
             }
             //End actual Function for loading css js
-        }
+            public function cptbs_load_methods(){
+                require_once WP_PLUGIN_DIR . '/create-cpt-by-shortcode/inc/shortcode_methods.php';
+            }
+        }   
     //End Class for displaying form for cpt     
 }
 if ( class_exists( 'cptbs_shortcode_form' ) ) {

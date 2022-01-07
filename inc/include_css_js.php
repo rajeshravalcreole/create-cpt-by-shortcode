@@ -21,8 +21,11 @@ if ( ! class_exists( 'cptbs_include_css_js' ) ) {
 
         // Function for Enqueue css/js
         public function cptbs_enqueue(){
-            wp_enqueue_style( 'bootstrap-css', PLUGIN_URL .'assets/css/bootstrap.min.css','','',false );
-            wp_enqueue_script( 'custom-js', PLUGIN_URL . 'assets/js/custom.js',array('jquery'),'',true);
+            wp_enqueue_style( 'bootstrap-css', FOLDER_PATH .'assets/css/bootstrap.min.css','','',false );
+            wp_enqueue_style( 'custom-css', FOLDER_PATH .'assets/css/custom.css','','',false );
+            wp_enqueue_script( 'custom-js', FOLDER_PATH . 'assets/js/custom.js',array('jquery'),'',true);
+            wp_enqueue_script( 'jquery-validate-js', FOLDER_PATH . 'assets/js/jquery.validate.min.js',array('jquery'),'',true);
+            wp_enqueue_script( 'jquery-addit-methods-js', FOLDER_PATH . 'assets/js/additional-methods.min.js',array('jquery'),'',true);
             // localize the script to your domain name, so that you can reference the url to admin-ajax.php file easily
             wp_localize_script( 'custom-js', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
         }
